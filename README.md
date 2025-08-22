@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Personal Finance Tracker
 
 Node.js + Express backend with JSON persistence. Frontend uses Tailwind CSS (CDN) and Chart.js (CDN).
@@ -45,3 +46,6 @@ Node.js + Express backend with JSON persistence. Frontend uses Tailwind CSS (CDN
 ## Notes
 - JSON files are created automatically under `data/`.
 - This app is intentionally file-based storage for simplicity.
+=======
+# Finance-Tracking-
+>>>>>>> 0b93c73dbd79d7c40fa18c210939abe65f10c087
