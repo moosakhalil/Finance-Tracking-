@@ -89,10 +89,31 @@
   }
 
   async function api(path, options={}){
-    const res = await fetch(path, { ...options, headers: { 'Content-Type': 'application/json', ...(options.headers||{}), ...(state.token?{ Authorization: `Bearer ${state.token}` }:{}) } });
-    if (!res.ok) throw new Error((await res.json()).message || 'Request failed');
+    const base = typeof window !== 'undefined' && window.API_BASE ? window.API_BASE : '';
+    const res = await fetch(base + path, {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        ...(options.headers||{}),
+        ...(state.token?{ Authorization: `Bearer ${state.token}` }:{})
+      }
+    });
+    const contentType = res.headers.get('content-type') || '';
+    if (!res.ok) {
+      // Try to parse JSON error; if not JSON, fall back to text to avoid Unexpected token errors
+      try {
+        if (contentType.includes('application/json')){
+          const err = await res.json();
+          throw new Error(err?.message || `HTTP ${res.status}`);
+        }
+      } catch {}
+      const text = await res.text().catch(()=> '');
+      throw new Error(text ? text.slice(0, 200) : `HTTP ${res.status}`);
+    }
     if (res.status === 204) return null;
-    return res.json();
+    if (contentType.includes('application/json')) return res.json();
+    // Fallback for non-JSON success responses
+    return res.text();
   }
 
   function computeStats() {
