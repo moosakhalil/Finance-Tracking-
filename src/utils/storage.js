@@ -1,9 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-// Use writable temp dir on Vercel serverless; fallback to local ./data in development
-const isVercel = !!process.env.VERCEL;
-const dataDir = isVercel ? path.join('/tmp', 'data') : path.join(__dirname, '../../data');
+const dataDir = path.join(__dirname, '../../data');
 
 function ensureDataDir() {
   if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
