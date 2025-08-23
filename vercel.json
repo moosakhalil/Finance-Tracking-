@@ -6,6 +6,7 @@
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/[[...slug]].js" }
   ],
-  "ignoreCommand": "echo Using repo files",
-  "public": true
+  "functions": {
+    "api/**/*.js": { "runtime": "nodejs20.x" }
+  }
 }
