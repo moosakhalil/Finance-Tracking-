@@ -61,5 +61,14 @@
     "description": "",
     "date": "2025-08-22",
     "userId": "Muhammad Moosa"
+  },
+  {
+    "id": "f9eb2538-227d-4572-b1a0-62299defbe5e",
+    "type": "expense",
+    "amount": 500,
+    "category": "telephone bill",
+    "description": "",
+    "date": "2025-08-22",
+    "userId": "Muhammad Moosa"
   }
 ]
